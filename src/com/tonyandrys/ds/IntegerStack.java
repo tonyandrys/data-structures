@@ -3,7 +3,6 @@
  *
  * @author Tony Andrys
  *         Created: 10/18/2013
- *         (C) 2013 - Tony Andrys
  */
 
 package com.tonyandrys.ds;
@@ -31,6 +30,7 @@ public class IntegerStack {
 
     /**
      * Adds the passed element to the stack.
+     * Time complexity: O(1)
      * @param x int to add to stack
      */
     public void push(int x) {
@@ -48,6 +48,7 @@ public class IntegerStack {
 
     /**
      * Pops the top item off of the stack and returns it.
+     * Time complexity: O(1)
      * If no item can be removed, an -1 will be returned to signify an error.
      */
     public int pop() {

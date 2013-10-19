@@ -5,7 +5,6 @@ package com.tonyandrys.ds;
  *
  * @author Tony Andrys
  *         Created: 10/18/2013
- *         (C) 2013 - Tony Andrys
  */
 
 /**
@@ -27,6 +26,7 @@ public class IntegerQueue {
 
     /**
      * Adds an item to the queue.
+     * Time complexity: O(1)
      * @param x int to enqueue
      */
     public void enqueue(int x) {
@@ -42,6 +42,7 @@ public class IntegerQueue {
 
     /**
      * Returns the integer at the front of the queue.
+     * Time complexity: O(1)
      * @return dequeued integer
      */
     public int dequeue() {
