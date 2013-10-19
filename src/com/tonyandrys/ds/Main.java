@@ -14,7 +14,18 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        System.out.println("About to build a queue, yall.");
+        System.out.println("About to build a SLL.");
+        IntegerLinkedList ll = new IntegerLinkedList(10);
+        ll.appendValue(11);
+        ll.appendValue(12);
+        ll.appendValue(3);
+        ll.appendValue(0);
+        ll.printList();
+        System.out.println("The size of the linked list is: " + ll.getLength());
+
+        ll.removeValue(5);
+
+
 
     }
 }
