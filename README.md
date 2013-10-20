@@ -32,4 +32,4 @@ Structures Implemented
 	* Stack
 	* Queue
 * Linked Lists
-	* Singly Linked List (partial implementation)
+	* Singly Linked List 
