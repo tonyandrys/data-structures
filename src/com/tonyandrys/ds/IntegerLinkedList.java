@@ -23,6 +23,7 @@ package com.tonyandrys.ds;
  */
 public class IntegerLinkedList {
 
+    private final String NULL = "NULL";
     int length; // length of linked list
     Node head; // First element in linked list
 
@@ -64,7 +65,6 @@ public class IntegerLinkedList {
 
             // Traverse to the end of the list.
             while (n != null) {
-                System.out.println("SLL: Visited node with value: " + n.data);
 
                 /* If this node's link field points to null, it is the
                 end of the list. Therefore, we must break and add a new node. */
@@ -85,7 +85,24 @@ public class IntegerLinkedList {
     }
 
     /**
-     * Removes the item with integer data x from the linked list.
+     * Removes the item with integer data x from the linked list. The removal process takes three different cases,
+     * outlined below.
+     *
+     * CASE 1: The head node is the node to delete. No traversal is necessary-- just set the head to
+     * the list to be the second node in the list.
+     *
+     * CASE 2: Node to remove exists somewhere between two nodes in the list. This requires linking the
+     * predecessor of the doomed node to the successor of the doomed node.
+     *
+     * Example: If 2 is to be removed, link 1 and 3 together and let 2 be sucked up by the garbage collector.
+     *  ---        ---         ---       ---
+     * | 1 | -    | 2 |    -> | 3 | --> | 4 |
+     *  ---   |    ---    |    ---       ---
+     *        |___________|
+     *
+     * [The linked list now has a length of 3.]
+     *
+     * CASE 3: Node to remove is at the end of the list.
      *
      * Time complexity:
      * O(N) - If the node with data x is at the end of the linked list, then we have to traverse the entire list
@@ -95,28 +112,46 @@ public class IntegerLinkedList {
      *
      * @param x integer data field of node to remove
      */
-//
-//   NOT FINISHED. WILL FINISH AFTER EATING ONE WHOLE PIZZA.
-//
-//   public void removeValue(int x) {
-//        if (head == null) {
-//            System.out.println("SLL: No elements to remove!");
-//        } else {
-//
-//            /* When removing an item from the middle of a linked list, we need to "relink" the list by connecting
-//            the predecessor of the doomed node to the successor of the doomed node. By essentially "skipping" the node
-//            to delete, traversal is still possible. */
-//            Node n = head;
-//            Node prev = null;
-//
-//            while (n != null) {
-//                System.out.println("SLL: Currently visiting node with value: " + n.data);
-//                n = n.link;
-//                prev = n;
-//                System.out.println("SLL: Previous node had value: " + prev.data);
-//            }
-//        }
-//    }
+
+   public void removeValue(int x) {
+        if (head == null) {
+            System.out.println("SLL: No elements to remove!");
+        } else {
+
+            Node curr = head;
+            Node prev = null;
+
+            /* Handle case 1. */
+            if (head.data == x) {
+                System.out.println("SLL: Head node is doomed. New head has value: " + head.link.data);
+                head = head.link;
+                length--;
+            } else {
+
+                /* Cases 2 and 3 are handled within the while loop. */
+                while (curr != null) {
+
+                    // If we encounter the value to remove, relink.
+                    if ((curr.data == x) && (curr.link != null)) {
+                        System.out.println("SLL: Middle node is doomed. Linking " + prev.data + " to " + curr.link.data);
+                        prev.link = curr.link;
+                        length--;
+                        break;
+                    } else if ((curr.data == x) && (curr.link == null)) {
+
+                        // The node to remove is the tail. Update the predecessor to point to null.
+                        System.out.println("SLL: Tail node is doomed. Linking " + prev.data + " to NULL.");
+                        prev.link = null;
+                        length--;
+                        break;
+                    }
+
+                    prev = curr; // Before iterating again, set the node that was just visited as the previous node
+                    curr = curr.link; // Then set the next node in the list to be the node we are about to visit
+                }
+            }
+        }
+    }
 
     /**
      * Returns the number of elements currently stored in this linked list.
@@ -157,7 +192,7 @@ public class IntegerLinkedList {
 
             /* When the while loop breaks, we are at the end of the list.
             Append NULL to signify the end of the list and print the collected output. */
-            output += "NULL";
+            output += NULL;
             System.out.println(output);
         }
     }
