@@ -32,17 +32,35 @@ public class IntegerBST {
     }
 
     /**
-     * Inserts a integer key in the appropriate place on the BST.
-     * @param key integer key to insert
+     * Recursively inserts a new node with passed key in the appropriate position on the BST.
+     * @param n parent node
+     * @param x integer key to insert
      */
-    public void insertKey(int key) {
+    public void insertNode(Node n, int x) {
 
-        // If no root node exists, this key becomes the root node.
-        if (root == null) {
-            root = new Node(key);
+        if (x < n.key) {
+            /* If the key to insert is less than the vale of this node,
+               it needs to be inserted to the left of this node. */
+            if (n.left == null) {
+                // If no left child of this node exists, set this node's left child to a new node with value x.
+                n.left = new Node(x);
+            } else {
+                // If there is a left child of this node, traverse left.
+                insertNode(n.left, x);
+            }
+        } else if (x > n.key) {
+            /* If the key to insert is greater than the vale of this node,
+               it needs to be inserted to the right of this node. */
+            if (n.right == null) {
+                n.right = new Node(x);
+            } else {
+                // If there is a right child of this node, traverse right.
+                insertNode(n.right, x);
+            }
+        } else {
+            System.out.println("Duplicate key detected! Discarding " + x + ".");
         }
 
-        // If a root node exists, this key can either be less than, greater
     }
 
 

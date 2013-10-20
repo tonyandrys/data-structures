@@ -33,3 +33,5 @@ Structures Implemented
 	* Queue
 * Linked Lists
 	* Singly Linked List 
+* Trees
+	* Binary Search Tree (partial implementation)
